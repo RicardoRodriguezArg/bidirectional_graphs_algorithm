@@ -1,12 +1,21 @@
 #include "graph_utils.h"
 
-Graph::Graph(const DefaultAdjancecyList & adjancecy_list):m_adjancecy_list(adjancecy_list)
+NSGraph::Graph(const DefaultAdjancecyList & adjancecy_list):m_adjancecy_list(adjancecy_list)
 {}
 
-DefaultAdjancecyList Graph::Graph::get_transpose_graph() const noexcept
+DefaultAdjancecyList NSGraph::Graph::get_transpose_graph() const noexcept
 {
-	return {};
+	DefaultAdjancecyList transpose_graph:
+	transpose_graph.reserve(m_adjancecy_list.size());
+	int current_index = 0;
+	std::for_each(std::begin(m_adjancecy_list), std::end(m_adjancecy_list), [&current_index, transpose_graph](const std::vector<int> & adjancecy_vertex)
+		{
+			for (const auto & vertex : adjancecy_vertex)
+			{
+			 transpose_graph[vertex].emplace_back(current_index);	
+			}
+			++current_index;
+		}
+		);
+	return transpose_graph;
 }
-
-void Graph::Graph::add_edge(const NodeType & source_node, const NodeType & target_node)
-{}

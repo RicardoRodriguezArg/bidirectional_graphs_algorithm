@@ -19,6 +19,7 @@ namespace NSAlgorithm{
 	using DefaultGraphType = std::vector<std::vector<NodeType> >;
 	using DistanceMatrixType = std::vector< CostType >;
 	using CostNodeTuple = std::tuple<NodeType, NodeType>;
+	
 
 
 
@@ -27,7 +28,8 @@ namespace NSAlgorithm{
 	{
 		using shortestPathContainnerType = std::unordered_map<NodeType, NodeType>;
 		using CostMatrixType = std::unordered_map<NodeType, NodeType>;
-		
+		template<typename Comparator>
+    	using GraphPriorityQueueType = std::priority_queue<CostNodeTuple, std::vector<CostNodeTuple>, Comparator>;
 		struct QueueComparator{
 			bool operator()(const CostNodeTuple & left, const CostNodeTuple & right)
 			{
@@ -86,16 +88,13 @@ namespace NSAlgorithm{
 		
 		void init() noexcept
 		{
-			queue.clear();
+			queue = GraphPriorityQueueType<QueueComparator>{};
 			
 		}
 
-		
-
-		
 		const Graph & graph;
 		const MatrixCostType & cost_matrix;
-		std::priority_queue<CostNodeTuple, std::vector<CostNodeTuple>, QueueComparator> queue;
+		GraphPriorityQueueType<QueueComparator> queue;
 		//RelaxationFunctor relaxator;
 		shortestPathContainnerType shortest_path;
 	};

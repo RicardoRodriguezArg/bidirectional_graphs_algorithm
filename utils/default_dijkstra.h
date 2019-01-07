@@ -61,7 +61,7 @@ namespace NSAlgorithm{
 					const NodeType & child_node = graph[current_node_index][child_index];
 					//Relaxation of the nodes
 					const int & relaxation_cost = cost_matrix[current_node_index][child_index] + distance_cost_matrix[current_node_index];
-					if(cost_matrix[child_node][child_index] < relaxation_cost )
+					if(cost_matrix[current_node_index][child_index] < relaxation_cost )
 					{
 						distance_cost_matrix[child_node] = 	relaxation_cost;
 						fill_queue( child_node, relaxation_cost);

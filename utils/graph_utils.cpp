@@ -21,4 +21,29 @@ DefaultAdjancecyList Graph::get_transpose_graph() const
 	return transpose_graph;
 }
 
+size_t Graph::node_count() const noexcept
+{
+	return m_adjancecy_list.size();
+}
+
+adjancecyListIterator Graph::begin() const
+{
+	return m_adjancecy_list.begin();
+}
+
+adjancecyListIterator Graph::end() const
+{
+	return m_adjancecy_list.end();	
+}
+
+adjancecyListConstIterator Graph::cBegin() const
+{
+	return m_adjancecy_list.cbegin();
+}
+
+adjancecyListConstIterator Graph::cEnd() const;
+{
+	return m_adjancecy_list.cend();
+}
+
 }
